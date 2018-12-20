@@ -1,0 +1,17 @@
+{
+  "name": "polymer-app",
+  "main": "index.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-toast": "^2.1.2",
+    "practica2-element": "alfonsorios96/cards-component",
+    "login-component": "alfonsorios96/login-component",
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#2.1.0",
+    "paper-listbox": "PolymerElements/paper-listbox#2.1.1",
+    "paper-item": "PolymerElements/paper-item#2.1.1"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  }
+}

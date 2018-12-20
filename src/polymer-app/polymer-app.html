@@ -1,0 +1,106 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+
+<link rel="import" href="../../bower_components/login-component/login-component.html">
+<link rel="import" href="../../bower_components/practica2-element/cards-component.html">
+<link rel="import" href="./language-component.html">
+
+<dom-module id="polymer-app">
+    <template>
+        <style>
+            paper-toast {
+                --paper-toast-background-color: red;
+                --paper-toast-color: white;
+            }
+        </style>
+        <h2>[[localSelected.title]]</h2>
+        <paper-toast id="toast" class="fit-bottom"></paper-toast>
+        <language-component on-lang-changed="changeLanguage"></language-component>
+        <dom-if if="[[logged]]">
+            <template>
+                <cards-component users="[[users]]"></cards-component>
+                <paper-button on-tap="logout">Cerrar sesión</paper-button>
+            </template>
+        </dom-if>
+        <dom-if if="[[!logged]]">
+            <template>
+                <login-component on-login-user="login" on-register-user="signin"></login-component>
+            </template>
+        </dom-if>
+    </template>
+
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class PolymerApp extends Polymer.Element {
+            static get is() {
+                return 'polymer-app';
+            }
+
+            static get properties() {
+                return {
+                    users: {
+                        type: Array,
+                        value: []
+                    },
+                    logged: {
+                        type: Boolean,
+                        value: false
+                    },
+                    languageSelected: {
+                        type: String,
+                        value: '',
+                        observer: '_setLocal'
+                    },
+                    locales: {
+                        type: Object,
+                        value: {
+                            es: {
+                                title: 'HOla Mundo'
+                            },
+                            en: {
+                                title: 'Hello World !'
+                            }
+                        }
+                    },
+                    localSelected: {
+                        type: Object,
+                        value: {}
+                    }
+                };
+            }
+
+            signin(event) {
+                const user = event.detail;
+                this.push('users', user);
+            }
+
+            logout() {
+                this.set('logged', false);
+            }
+
+            _setLocal() {
+                this.set('localSelected', this.locales[this.languageSelected]);
+            }
+
+            login(event) {
+                const payload = event.detail;
+                const matchUsers = this.users.filter(user => user.username === payload.username && user.password === payload.password);
+                if (matchUsers.length === 1) {
+                    this.set('logged', true);
+                } else {
+                    this.$.toast.text = 'Credenciales inválidas';
+                    this.$.toast.show();
+                }
+            }
+            changeLanguage(event) {
+                this.set('languageSelected', event.detail.value);
+            }
+        }
+
+        window.customElements.define(PolymerApp.is, PolymerApp);
+    </script>
+</dom-module>
