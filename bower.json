@@ -4,11 +4,9 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "paper-toast": "^2.1.2",
-    "practica2-element": "alfonsorios96/cards-component",
-    "login-component": "alfonsorios96/login-component",
-    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#2.1.0",
-    "paper-listbox": "PolymerElements/paper-listbox#2.1.1",
-    "paper-item": "PolymerElements/paper-item#2.1.1"
+    "language-component": "alfonsorios96/language-component",
+    "cards-component": "alfonsorios96/cards-component",
+    "login-component": "alfonsorios96/login-component"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
